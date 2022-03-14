@@ -28,10 +28,12 @@ public class PatientMenu implements State {
         switch(choiceNumber) {
             case 1:
                 String sqlQueryRN = constructReviewNotesQuery(coupleID, pregNo);
-                return runReviewNotesQuery(sqlQueryRN);
+                runReviewNotesQuery(sqlQueryRN);
+                return null;
             case 2:
                 String sqlQueryRT = constructReviewTestsQuery(coupleID, pregNo);
-                return runReviewTestsQuery(sqlQueryRT);
+                runReviewTestsQuery(sqlQueryRT);
+                return null;
             case 3:
                 return new WriteNote(appointmentID);
             case 4:
@@ -50,7 +52,7 @@ public class PatientMenu implements State {
         return priorResult;
     }
 
-    private State runReviewNotesQuery(String sqlQueryRT) {
+    private void runReviewNotesQuery(String sqlQueryRT) {
         try {
             ResultSet rs = Prompt.GLOBAL_STATEMENT.executeQuery(sqlQueryRT);
             String out = "";
@@ -67,9 +69,9 @@ public class PatientMenu implements State {
 
                 out += String.format("%s\t%s\t%s\n", formattedAppTime, formattedTimestp, trimmedContent);
             }
-            if (out.isEmpty()) return new Review("No notes for this pregnancy");
+            if (out.isEmpty()) System.out.println("No notes for this pregnancy");
 
-            return new Review(out);
+            System.out.println(out);
 
         } catch (SQLException e) {
             int sqlCode = e.getErrorCode();
@@ -78,7 +80,6 @@ public class PatientMenu implements State {
             System.out.println("Code: " + sqlCode + "  sqlState: " + sqlState);
             System.out.println(e);
 
-            return null;
         }
     }
 
@@ -104,7 +105,7 @@ public class PatientMenu implements State {
         return sqlQuery;
     }
 
-    private Review runReviewTestsQuery(String query) {
+    private void runReviewTestsQuery(String query) {
         try {
             ResultSet rs = Prompt.GLOBAL_STATEMENT.executeQuery(query);
             String out = "";
@@ -124,9 +125,9 @@ public class PatientMenu implements State {
 
                 out += String.format("%s\t[%s]\t%s\n", formattedPresDate, ttype, resultFinal);
             }
-            if (out.isEmpty()) return new Review("No tests prescribed for this pregnancy");
+            if (out.isEmpty()) System.out.println("No tests prescribed for this pregnancy");
 
-            return new Review(out);
+            System.out.println(out);
 
         } catch (SQLException e) {
             int sqlCode = e.getErrorCode();
@@ -134,8 +135,6 @@ public class PatientMenu implements State {
 
             System.out.println("Code: " + sqlCode + "  sqlState: " + sqlState);
             System.out.println(e);
-
-            return null;
         }
     }
 }

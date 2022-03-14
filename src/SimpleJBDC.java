@@ -41,6 +41,7 @@ class simpleJDBC
         Statement statement = con.createStatement ( ) ;
 
         Prompt.GLOBAL_STATEMENT = statement;
+        Prompt.GLOBAL_CON = con;
         // Creating a table
         Prompt p = Prompt.getInstance();
         p.start();

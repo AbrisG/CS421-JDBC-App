@@ -1,3 +1,4 @@
+import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,11 +8,12 @@ public class Prompt {
 
     private static Prompt INSTANCE;
 
-    private Prompt() { }
+    private Prompt() {}
 
     private static Stack<State> actionStack = new Stack();
 
     public static Statement GLOBAL_STATEMENT;
+    public static Connection GLOBAL_CON;
 
     public static int GLOBAL_MIDWIFE;
 
