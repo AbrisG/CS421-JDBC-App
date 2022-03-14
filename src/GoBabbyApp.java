@@ -1,6 +1,6 @@
 import java.sql.* ;
 
-class simpleJDBC
+class GoBabbyApp
 {
     public static void main ( String [ ] args ) throws SQLException
     {
