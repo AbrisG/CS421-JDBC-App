@@ -48,7 +48,6 @@ public class AppointmentMenu implements State {
 
     @Override
     public String getOutput() {
-        System.out.println("AppointmentMenu");
         return priorResult + prompt;
     }
 }

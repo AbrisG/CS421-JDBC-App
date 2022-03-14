@@ -48,7 +48,6 @@ public class PatientMenu implements State {
 
     @Override
     public String getOutput() {
-        System.out.println("PatientMenu");
         return priorResult;
     }
 

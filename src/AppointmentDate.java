@@ -18,7 +18,6 @@ public class AppointmentDate implements State {
 
     @Override
     public String getOutput() {
-        System.out.println("AppointmentDate");
         return prompt;
     }
 
